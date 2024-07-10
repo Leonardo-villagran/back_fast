@@ -32,6 +32,27 @@
 $ npm install
 ```
 
+## Variables de entorno
+
+ - Generar un archivo .env en la raiz del proyecto
+  - Agregar las siguientes variables de entorno:
+```bash
+DATABASE_URL="postgresql://postgres:password@localhost:5432/fast_db?schema=public"
+
+JWT_SECRET="secreto"
+
+PORT=3050
+```
+
+## Migraciones
+
+ - Para correr las migraciones de la base de datos, ejecutar el siguiente comando:
+
+
+1. Ejecuta el comando `npx prisma migrate dev --name init` para crear la base de datos y aplicar las migraciones definidas en schema.prisma.
+2. Prisma creará la base de datos y las tablas Role y User según el esquema definido en schema.prisma.
+
+
 ## Running the app
 
 ```bash
@@ -43,19 +64,6 @@ $ npm run start:dev
 
 # production mode
 $ npm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
 ```
 
 ## Support

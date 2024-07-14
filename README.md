@@ -44,6 +44,7 @@ JWT_SECRET="secreto"
 PORT=3050
 ```
 
+
 ## Migraciones
 
  - Para correr las migraciones de la base de datos, ejecutar el siguiente comando:

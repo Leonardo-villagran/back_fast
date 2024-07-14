@@ -59,8 +59,33 @@ export class UsersService {
       },
     };
   }
-  async update(id: number, data: Prisma.UserUpdateInput): Promise<User> {
-    return this.prisma.user.update({ where: { id }, data });
+  async update(
+    id: number,
+    data: Prisma.UserUpdateInput,
+  ): Promise<Omit<User, 'password'>> {
+    // Si se proporciona una nueva contraseña, haz el hash
+    if (data.password) {
+      const hashedPassword = await bcrypt.hash(data.password as string, 8);
+      data.password = hashedPassword;
+    }
+
+    const updatedUser = await this.prisma.user.update({
+      where: { id },
+      data,
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        //password: true,
+        roleId: true,
+        createdAt: true,
+        updatedAt: true,
+        role: true,
+        // No seleccionamos el campo 'password'
+      },
+    });
+
+    return updatedUser;
   }
 
   async remove(id: number): Promise<User> {
